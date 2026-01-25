@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SolarGuard{% endblock %}</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <div class="d-flex">
+        {% block sidebar %}
+        {% if user.is_authenticated %}
+        <div id="sidebarBackdrop"></div>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo" style="position: relative;">
+                <i class="ph ph-sun" style="font-size:1.5rem; margin-right:8px; color:var(--primary);"></i> SolarGuard
+                <button class="sidebar-close" id="closeSidebar"
+                    style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); display: none;">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="{% url 'dashboard' %}"
+                        class="sidebar-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                        <i class="ph ph-squares-four" style="font-size:1.2rem;"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'profile' %}"
+                        class="sidebar-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+                        <i class="ph ph-user" style="font-size:1.2rem;"></i> Profil
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'setup_system' %}"
+                        class="sidebar-link {% if request.resolver_match.url_name == 'setup_system' %}active{% endif %}">
+                        <i class="ph ph-gear" style="font-size:1.2rem;"></i> Configuration
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="sidebar-link"
+                        style="background:none; border:none; width:100%; cursor:pointer;">
+                        <i class="ph ph-sign-out" style="font-size:1.2rem;"></i> Déconnexion
+                    </button>
+                </form>
+            </div>
+        </aside>
+        {% endif %}
+        {% endblock %}
+
+        <div class="main-wrapper" {% if not user.is_authenticated %}style="margin-left:0; width:100%;" {% endif %}>
+            {% if user.is_authenticated %}
+            <header class="topbar">
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <button class="menu-toggle" id="openSidebar">
+                        <i class="ph ph-list"></i>
+                    </button>
+                    <div class="page-title">{% block page_title %}Tableau de bord{% endblock %}</div>
+                </div>
+                <div class="user-menu">
+                    <div style="text-align:right; margin-right:8px;">
+                        <div style="font-weight:600;">{{ user.username }}</div>
+                        <div style="font-size:0.8rem; color:var(--text-muted);">Utilisateur</div>
+                    </div>
+                    <div class="user-avatar">
+                        {{ user.username|make_list|first|upper }}
+                    </div>
+                </div>
+            </header>
+            {% endif %}
+
+            <div class="content-area">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const openBtn = document.getElementById('openSidebar');
+            const closeBtn = document.getElementById('closeSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+
+            if (openBtn && sidebar && backdrop) {
+                openBtn.addEventListener('click', () => {
+                    sidebar.classList.add('active');
+                    backdrop.classList.add('active');
+                });
+
+                const closeMenu = () => {
+                    sidebar.classList.remove('active');
+                    backdrop.classList.remove('active');
+                };
+
+                backdrop.addEventListener('click', closeMenu);
+                if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+                // Close sidebar when clicking a link (optional but good for mobile)
+                const navLinks = sidebar.querySelectorAll('.sidebar-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+            }
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Inscription - SolarGuard{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 4rem auto; padding: 24px;">
+    <h1 style="font-size: 1.5rem; margin-bottom: 8px;">S'inscrire</h1>
+    <p class="text-muted" style="margin-bottom: 24px;">Tirez le meilleur parti de votre énergie.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div style="margin-bottom: 16px;">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small class="text-muted" style="display: block; margin-top: 4px;">{{ field.help_text }}</small>
+            {% endif %}
+            {% if field.errors %}
+            <ul class="errorlist" style="color: var(--danger); font-size: 0.8rem; list-style: none;">
+                {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <p style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin: 16px 0;">En cliquant sur
+            Accepter et s'inscrire, vous acceptez les <a href="#" style="color: var(--primary);">Conditions
+                d'utilisation</a>.</p>
+        <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 24px;">Accepter et
+            s'inscrire</button>
+    </form>
+
+    <div style="margin-top: 24px; text-align: center;">
+        <span class="text-muted">Déjà sur SolarGuard ?</span>
+        <a href="{% url 'login' %}"
+            style="color: var(--primary); font-weight: 600; text-decoration: none; margin-left: 4px;">S'identifier</a>
+    </div>
+</div>
+{% endblock %}

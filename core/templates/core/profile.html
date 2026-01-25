@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Mon Profil{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+    <div class="card">
+        <h1 style="font-size: 1.5rem; margin-bottom: 24px; color: var(--text);">Modifier mes informations</h1>
+
+        <form method="post" style="margin-bottom: 32px;">
+            {% csrf_token %}
+            {% for field in u_form %}
+            <div style="margin-bottom: 16px;">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <ul class="errorlist" style="color: var(--danger); font-size: 0.8rem; list-style: none;">
+                    {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div style="display:flex; justify-content:flex-end;">
+                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            </div>
+        </form>
+
+        <h3 style="margin-bottom: 16px; border-top: 1px solid var(--border); padding-top: 24px;">Sécurité &
+            Configuration</h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <a href="{% url 'password_change' %}" class="btn btn-outline"
+                style="text-align: center; justify-content:center;">Modifier mot de passe</a>
+            <a href="{% url 'setup_system' %}" class="btn btn-outline"
+                style="text-align: center; justify-content:center;">Refaire Configuration</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

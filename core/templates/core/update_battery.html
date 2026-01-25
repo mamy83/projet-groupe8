@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Mise à jour Batterie - SolarGuard{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 2rem auto;">
+    <h2 style="margin-bottom: 8px;">Mise à jour Batterie</h2>
+    <p class="text-muted" style="margin-bottom: 24px;">Relevez le pourcentage affiché sur votre contrôleur.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div style="margin-bottom: 16px;">
+            <label for="{{ form.level_percent.id_for_label }}">Niveau de charge (%)</label>
+            {{ form.level_percent }}
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button type="submit" class="btn btn-primary" style="flex: 1;">Enregistrer</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-outline" style="flex: 1;">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
