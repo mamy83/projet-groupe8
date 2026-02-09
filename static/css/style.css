@@ -154,8 +154,19 @@ body {
     padding: 32px;
     flex: 1;
     background-color: #f8fafc;
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-    background-size: 24px 24px;
+    background-image: radial-gradient(#94a3b8 2px, transparent 2px);
+    background-size: 30px 30px;
+    animation: moveBackground 5s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 30px;
+    }
 }
 
 /* Cards & UI */
@@ -377,4 +388,175 @@ input:focus {
 
 #sidebarBackdrop.active {
     display: block;
+}
+
+/* ========================================
+   ANIMATIONS - Premium Dashboard Effects
+======================================== */
+
+/* Fade in up animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Card animations */
+.card {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.grid-3 .card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.grid-3 .card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.grid-3 .card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.grid-2>div:first-child .card:nth-child(1) {
+    animation-delay: 0.4s;
+}
+
+.grid-2>div:first-child .card:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.grid-2>div:last-child .card:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.grid-2>div:last-child .card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.grid-2>div:last-child .card:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+/* Card hover effects */
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(217, 119, 6, 0.15);
+}
+
+/* Metric number animation */
+.metric-large {
+    transition: all 0.3s ease;
+}
+
+.card:hover .metric-large {
+    transform: scale(1.05);
+}
+
+/* Button pulse animation */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-primary:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Chart container animation */
+#batteryGauge,
+#batteryHistoryChart,
+#applianceDonutChart {
+    animation: fadeIn 0.8s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+/* Icon spin on hover */
+.card:hover .ph-battery-charging,
+.card:hover .ph-hourglass-medium,
+.card:hover .ph-sun-dim {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* Table row hover */
+.table-row {
+    transition: all 0.2s ease;
+}
+
+.table-row:hover {
+    background: var(--primary-bg);
+    transform: translateX(4px);
+}
+
+/* Recommendation item animation */
+.recommendation-item {
+    transition: all 0.3s ease;
+}
+
+.recommendation-item:hover {
+    transform: translateX(8px);
+    background: rgba(217, 119, 6, 0.05);
+    border-radius: 8px;
+    padding: 8px;
+    margin: -8px;
+}
+
+/* Loading shimmer effect (for empty states) */
+.shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
 }

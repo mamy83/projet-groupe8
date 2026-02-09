@@ -4,8 +4,8 @@ def calculate_energy(capacity_ah, voltage, level_percent):
 
 def estimate_autonomy(available_wh, consumption_w):
     """Estime l'autonomie en heures."""
-    if consumption_w == 0:
-        return 0
+    if consumption_w <= 0:
+        return 99.9  # Indique une autonomie quasi-infinie (pas de conso)
     return available_wh / consumption_w
 
 def get_recommendations(level_percent, appliances):
@@ -18,19 +18,20 @@ def get_recommendations(level_percent, appliances):
     avoid = []
     
     # Détermination de l'état du système
+    # Détermination de l'état du système
     if level_percent > 70:
         status = "OPTIMAL"
         message = "Batterie bien chargée. Vous pouvez utiliser vos appareils de confort."
         icon = "ph-check-circle"
         color = "var(--success)"
-    elif level_percent > 30:
+    elif level_percent > 20: # Seuil critique aligné sur le cahier des charges
         status = "VIGILANCE"
         message = "Niveau moyen. Privilégiez les appareils essentiels."
         icon = "ph-warning-circle"
         color = "var(--warning)"
     else:
         status = "CRITIQUE"
-        message = "Batterie faible ! Coupez tout le superflu pour préserver l'éclairage."
+        message = "Batterie faible (sous 20%) ! Coupez tout le superflu pour préserver l'éclairage."
         icon = "ph-prohibit"
         color = "var(--danger)"
     

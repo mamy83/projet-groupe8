@@ -1,0 +1,732 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SolarGuard - Optimisez votre énergie solaire{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const track = document.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById('nextSlide');
+        const prevButton = document.getElementById('prevSlide');
+        const dotsNav = document.querySelector('.carousel-dots');
+        const dots = Array.from(dotsNav.children);
+
+        let currentIndex = 0;
+
+        const updateCarousel = (index) => {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+            currentIndex = index;
+        };
+
+        nextButton.addEventListener('click', () => {
+            let nextIndex = (currentIndex + 1) % slides.length;
+            updateCarousel(nextIndex);
+        });
+
+        prevButton.addEventListener('click', () => {
+            let prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel(prevIndex);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateCarousel(index);
+            });
+        });
+
+        // Auto-play
+        setInterval(() => {
+            let nextIndex = (currentIndex + 1) % slides.length;
+            updateCarousel(nextIndex);
+        }, 5000);
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Full Width Landing Header -->
+<header class="landing-header-wrapper">
+    <div class="landing-header-container">
+        <div class="logo">
+            <svg class="solarguard-logo" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" fill="url(#logo_grad)" />
+                <circle cx="16" cy="16" r="6" fill="white" fill-opacity="0.9" />
+                <path
+                    d="M16 8V10M16 22V24M8 16H10M22 16H24M10.34 10.34L11.75 11.75M20.25 20.25L21.66 21.66M10.34 21.66L11.75 20.25M20.25 11.75L21.66 10.34"
+                    stroke="white" stroke-width="2" stroke-linecap="round" />
+                <defs>
+                    <linearGradient id="logo_grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#F59E0B" />
+                        <stop offset="1" stop-color="#D97706" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="logo-text">SolarGuard</span>
+        </div>
+        <nav class="landing-nav">
+            <a href="{% url 'login' %}" class="nav-link">Connexion</a>
+            <a href="{% url 'signup' %}" class="btn btn-primary" style="padding: 8px 16px;">S'inscrire</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Full Width Carousel (Now acting as Hero) -->
+<section class="carousel-fullwidth-wrapper">
+    <div class="carousel-container-full">
+        <div class="carousel-track">
+            <div class="carousel-slide active">
+                <img src="{% static 'images/solar_home_family_1770635566565.png' %}" alt="Solar Home Family">
+                <div class="slide-caption-hero">
+                    <h1>Optimisez votre autonomie <span class="text-primary">solaire</span></h1>
+                    <p>L'énergie solaire pour toute la famille, gérée intelligemment.</p>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="{% static 'images/solar_algorithm_dashboard_1770635462363.png' %}" alt="Algorithm Dashboard">
+                <div class="slide-caption-hero">
+                    <h1>Algorithmes de <span class="text-primary">prédiction</span></h1>
+                    <p>Anticipez vos besoins énergétiques avec une précision inégalée.</p>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="{% static 'images/solar_battery_dashboard_1770635684360.png' %}" alt="Battery Dashboard">
+                <div class="slide-caption-hero">
+                    <h1>Suivi de <span class="text-primary">batterie</span></h1>
+                    <p>Visualisez l'état de santé de vos accumulateurs en temps réel.</p>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="{% static 'images/smart_appliances_control_1770635728381.png' %}" alt="Smart Control">
+                <div class="slide-caption-hero">
+                    <h1>Contrôle <span class="text-primary">intelligent</span></h1>
+                    <p>Gérez vos appareils à distance pour maximiser votre autonomie.</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-btn prev" id="prevSlide"><i class="ph ph-caret-left"></i></button>
+        <button class="carousel-btn next" id="nextSlide"><i class="ph ph-caret-right"></i></button>
+
+        <div class="carousel-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+        </div>
+    </div>
+</section>
+
+<div class="landing-container">
+
+    <!-- Detailed Feature Sections -->
+    <section class="feature-detail">
+        <div class="feature-text">
+            <span class="badge">Analyse Intelligente</span>
+            <h2>Prolongez la vie de vos batteries de <span class="text-primary">2 ans</span></h2>
+            <p class="text-muted">Grâce à notre algorithme avancé, SolarGuard évite les décharges profondes qui
+                détruisent vos accumulateurs. Recevez des conseils précis sur le moment idéal pour charger vos appareils
+                lourds.</p>
+            <ul class="feature-list">
+                <li><i class="ph ph-check-circle-fill"></i> Rapports de santé quotidiens</li>
+                <li><i class="ph ph-check-circle-fill"></i> Alertes prédictives personnalisées</li>
+                <li><i class="ph ph-check-circle-fill"></i> Optimisation des cycles de charge</li>
+            </ul>
+        </div>
+        <div class="feature-image-container">
+            <img src="{% static 'images/battery_monitoring_3d_1770635768817.png' %}" alt="Solar Battery Monitoring"
+                class="feature-img">
+        </div>
+    </section>
+
+    <section class="feature-detail">
+        <div class="feature-text">
+            <span class="badge">Confort & Économie</span>
+            <h2>Utilisez vos appareils sans sacrifier <span class="text-primary">l'éclairage</span></h2>
+            <p class="text-muted">SolarGuard classe vos appareils par priorité. En période critique, le système vous
+                aide à prioriser l'essentiel (lampes, wifi, frigo) tout en mettant en pause le superflu pour garantir
+                votre autonomie nocturne.</p>
+            <ul class="feature-list">
+                <li><i class="ph ph-check-circle-fill"></i> Gestion par priorités (Critique vs Confort)</li>
+                <li><i class="ph ph-check-circle-fill"></i> Estimation exacte de l'autonomie restante</li>
+                <li><i class="ph ph-check-circle-fill"></i> Base de données d'appareils pré-configurés</li>
+            </ul>
+        </div>
+        <div class="feature-image-container">
+            <img src="{% static 'images/home_appliances_energy_1770635807421.png' %}"
+                alt="Home Appliances Energy Management" class="feature-img">
+        </div>
+    </section>
+
+
+    <!-- Features Grid Section (Previous) -->
+    <section class="features">
+        <h2 class="section-title">Pourquoi choisir SolarGuard ?</h2>
+        <div class="grid-3">
+            <div class="card feature-card">
+                <div class="feature-icon"><i class="ph ph-lightning"></i></div>
+                <h3>Conseils en temps réel</h3>
+                <p class="text-muted">Sachez exactement quels appareils utiliser sans risquer la décharge profonde de
+                    vos batteries.</p>
+            </div>
+            <div class="card feature-card">
+                <div class="feature-icon"><i class="ph ph-chart-line-up"></i></div>
+                <h3>Suivi de l'autonomie</h3>
+                <p class="text-muted">Visualisez vos statistiques hebdomadaires et l'évolution de vos charges pour une
+                    meilleure gestion.</p>
+            </div>
+            <div class="card feature-card">
+                <div class="feature-icon"><i class="ph ph-clock"></i></div>
+                <h3>Longévité accrue</h3>
+                <p class="text-muted">Réduisez l'usure prématurée de vos batteries de plus de 15% grâce à une gestion
+                    intelligente.</p>
+            </div>
+        </div>
+    </section>
+
+
+</div> <!-- End landing-container -->
+
+<!-- Full Width Footer -->
+<footer class="landing-footer-wrapper">
+    <div class="landing-footer-container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">
+                    <svg class="solarguard-logo" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" fill="url(#footer_logo_grad)" />
+                        <circle cx="16" cy="16" r="6" fill="white" fill-opacity="0.9" />
+                        <path
+                            d="M16 8V10M16 22V24M8 16H10M22 16H24M10.34 10.34L11.75 11.75M20.25 20.25L21.66 21.66M10.34 21.66L11.75 20.25M20.25 11.75L21.66 10.34"
+                            stroke="white" stroke-width="2" stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="footer_logo_grad" x1="4" y1="2" x2="28" y2="30"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#F59E0B" />
+                                <stop offset="1" stop-color="#D97706" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">SolarGuard</span>
+                </div>
+                <p class="text-muted" style="margin-top: 12px; font-size: 0.85rem;">Solution intelligente pour
+                    l'optimisation énergétique en Afrique.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Plateforme</h4>
+                <a href="{% url 'login' %}">Connexion</a>
+                <a href="{% url 'signup' %}">Inscription</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <a href="#">Support</a>
+                <a href="#">Partenariats</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SolarGuard. Tous droits réservés.</p>
+            <div class="social-icons">
+                <a href="#"><i class="ph ph-facebook-logo"></i></a>
+                <a href="#"><i class="ph ph-twitter-logo"></i></a>
+                <a href="#"><i class="ph ph-linkedin-logo"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% block extra_css %}
+<style>
+    /* Reset content-area for landing page */
+    .content-area {
+        padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        /* Keep the background pattern but remove the padding */
+        background-color: #f8fafc;
+        background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+        background-size: 24px 24px;
+        animation: moveBackground 20s linear infinite;
+    }
+
+    @keyframes moveBackground {
+        0% {
+            background-position: 0 0;
+        }
+
+        100% {
+            background-position: 0 480px;
+        }
+    }
+
+    .main-wrapper {
+        min-height: 100vh;
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    /* Ensure body/html don't have constraints */
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+</style>
+{% endblock %}
+
+<style>
+    .landing-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px 60px;
+        flex: 1;
+        /* This pushes the footer to the bottom */
+    }
+
+    /* Full Width Header */
+    .landing-header-wrapper {
+        width: 100%;
+        background: white;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        margin-bottom: 0;
+    }
+
+    .landing-header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 16px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .landing-header-container .logo,
+    .footer-brand .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: -0.02em;
+    }
+
+    .solarguard-logo {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .logo:hover .solarguard-logo {
+        transform: rotate(15deg) scale(1.1);
+    }
+
+    .logo-text {
+        background: linear-gradient(135deg, var(--text) 0%, #4b5563 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .landing-nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .nav-link {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+        color: var(--primary);
+    }
+
+    .hero {
+        display: flex;
+        align-items: center;
+        gap: 48px;
+        padding: 60px 0;
+        min-height: 60vh;
+    }
+
+    .hero-content {
+        flex: 1;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 24px;
+        color: var(--text);
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        margin-bottom: 40px;
+        max-width: 600px;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 16px;
+    }
+
+    .btn-lg {
+        padding: 14px 32px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+
+    .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Feature Detail Sections */
+    .feature-detail {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        padding: 100px 0;
+    }
+
+    .feature-text {
+        flex: 1;
+    }
+
+    .feature-text h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 16px 0 24px;
+        color: var(--text);
+    }
+
+    .feature-image-container {
+        flex: 1;
+    }
+
+    .feature-img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+        object-fit: cover;
+        height: 400px;
+    }
+
+    .badge {
+        display: inline-block;
+        background: var(--primary-bg);
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.85rem;
+        padding: 6px 16px;
+        border-radius: 100px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .feature-list {
+        list-style: none;
+        margin-top: 32px;
+        display: grid;
+        gap: 16px;
+    }
+
+    .feature-list li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+        color: var(--text);
+    }
+
+    .feature-list i {
+        color: var(--primary);
+        font-size: 1.25rem;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.25rem;
+        margin: 80px 0 40px;
+    }
+
+    .feature-card {
+        text-align: center;
+        padding: 40px;
+        transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 20px;
+    }
+
+    .social-proof {
+        text-align: center;
+        margin-top: 80px;
+        padding: 40px;
+        background: white;
+        border-radius: 12px;
+        border: 1px dashed var(--border);
+    }
+
+    .landing-footer-wrapper {
+        margin-top: 100px;
+        background: white;
+        border-top: 1px solid var(--border);
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.03);
+        width: 100%;
+    }
+
+    .landing-footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 60px 40px 0;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 60px;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .footer-links h4 {
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+        color: var(--text);
+    }
+
+    .footer-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary);
+    }
+
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 32px 0;
+        border-top: 1px solid var(--border);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 20px;
+        font-size: 1.25rem;
+    }
+
+    .social-icons a {
+        color: var(--text-muted);
+        transition: color 0.2s;
+    }
+
+    .social-icons a:hover {
+        color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+        .footer-grid {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 40px;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    /* Full Width Carousel Hero */
+    .carousel-fullwidth-wrapper {
+        width: 100%;
+        overflow: hidden;
+        background: white;
+    }
+
+    .carousel-container-full {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel-track {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        position: relative;
+        height: 600px;
+    }
+
+    .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        image-rendering: auto;
+        image-rendering: high-quality;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        filter: contrast(1.05) brightness(0.95);
+    }
+
+    .slide-caption-hero {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 100px 40px 60px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        color: white;
+        text-align: center;
+    }
+
+    .slide-caption-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
+    .slide-caption-hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        color: white;
+        border: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.3s;
+    }
+
+    .carousel-btn:hover {
+        background: white;
+        color: var(--text);
+    }
+
+    .prev {
+        left: 20px;
+    }
+
+    .next {
+        right: 20px;
+    }
+
+    .carousel-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .dot.active {
+        background: white;
+        transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+        .carousel-container {
+            margin: 0 16px;
+        }
+
+        .carousel-slide img {
+            height: 300px;
+        }
+
+        .slide-caption {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 16px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            margin: 0 auto 32px;
+        }
+
+        .hero-actions {
+            flex-direction: column;
+        }
+
+        .hero-image {
+            margin-top: 40px;
+        }
+    }
+</style>
+{% endblock %}

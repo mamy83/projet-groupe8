@@ -5,6 +5,11 @@ from .forms import SolarSystemForm, ApplianceForm, BatteryReadingForm, CustomUse
 from .models import SolarSystem, Appliance, BatteryReading
 from . import utils
 
+def landing(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    return render(request, 'core/landing.html')
+
 @login_required
 def dashboard(request):
     try:
@@ -31,8 +36,11 @@ def dashboard(request):
         )
         
         # Simple autonomy estimate based on current appliances average if active?
-        # For now, let's use a standard 50W load as reference if none
-        avg_load = sum(app.power_w for app in appliances if app.is_essential) or 50
+        essential_load = sum(app.power_w for app in appliances if app.is_essential)
+        total_load = sum(app.power_w for app in appliances)
+        
+        # If no essential appliances, use average of all appliances or 50W default
+        avg_load = essential_load or (total_load / (len(appliances) or 1)) or 50
         autonomy = utils.estimate_autonomy(energy_wh, avg_load)
         
         recs = utils.get_recommendations(last_reading.level_percent, appliances)
@@ -55,6 +63,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user.backend = 'django.contrib.auth.backends.ModelBackend' 
             login(request, user)
             return redirect('setup_system')
     else:

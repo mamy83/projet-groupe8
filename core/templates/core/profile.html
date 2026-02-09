@@ -2,6 +2,26 @@
 
 {% block page_title %}Mon Profil{% endblock %}
 
+{% block extra_css %}
+<style>
+    .content-area {
+        background-color: #f8fafc;
+        background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+        background-size: 24px 24px;
+        animation: moveBackground 20s linear infinite;
+    }
+
+    @keyframes moveBackground {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 0 480px;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div style="max-width: 600px; margin: 0 auto;">
     <div class="card">
