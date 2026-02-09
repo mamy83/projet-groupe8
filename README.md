@@ -1,62 +1,86 @@
-# SolarGuard – Optimiseur de consommation solaire
+# ☀️ SolarGuard – Optimiseur d'Énergie Solaire Intelligent
 
-SolarGuard est une application web conçue pour aider les utilisateurs d'installations solaires à gérer efficacement l'énergie stockée dans leurs batteries. Grâce à un algorithme intelligent, l'application analyse la charge actuelle et conseille l'usage des appareils pour maximiser l'autonomie et préserver la durée de vie des batteries.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-5.0%2B-green.svg)](https://www.djangoproject.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Fonctionnalités Clés
+**SolarGuard** est une solution web premium conçue pour maximiser l'autonomie des installations solaires résidentielles. Grâce à des algorithmes de prédiction intelligents et une interface visuelle de pointe, gérez votre énergie comme un expert.
 
-- **Tableau de Bord Dynamique** : Visualisez l'état de votre batterie, l'autonomie restante et l'historique de charge.
-- **Algorithme de Conseil** : Recevez des recommandations personnalisées (Optimal, Vigilance, Critique) selon votre niveau d'énergie.
-- **Gestion d'Appareils** : Gérez vos équipements électriques par puissance et priorité (critique vs confort).
-- **Configuration Système** : Paramétrez les détails techniques de votre installation (Ah, Watts, Tension).
+![Aperçu Dashboard](static/images/solar_algorithm_dashboard_1770635462363.png)
 
-## Prérequis
+---
 
-- **Python** : Version 3.10 ou supérieure recommandée.
-- **Navigateur Web** : Chrome, Firefox, Edge ou Safari (recommandé pour une meilleure expérience responsive).
+## ✨ Points Forts
 
-## Installation
+### 🚀 Design Premium & Expérience Utilisateur
+- **Landing Page Immersive** : Navigation fluide, carrousels dynamiques et animations d'entrée élégantes.
+- **Interface Réactive** : Entièrement optimisée pour mobile, tablette et desktop.
+- **Animations Subtiles** : Fond dot-pattern animé en continu et transitions de cartes fluides pour une sensation de modernité.
 
-### 1. Cloner le projet
+### 📊 Tableau de Bord Analytique (ApexCharts)
+- **Visualisation Temps Réel** : Jauge radiale animée pour le niveau de batterie actuel.
+- **Historique Prédictif** : Graphique d'aire illustrant l'évolution de votre charge sur les dernières 24h.
+- **Distribution Énergétique** : Analyse de la répartition de consommation par appareil via un graphique donut.
+
+### 🧠 Algorithme de Conseil Intelligent
+- **Priorisation Automatique** : Classification des appareils en "Recommandé", "Acceptable" ou "À éviter" selon l'état de la batterie.
+- **Calcul d'Autonomie** : Estimation précise du temps restant basée sur votre consommation actuelle.
+- **Modes de Vigilance** : Seuils critiques (20%) et optimaux (80%) pour préserver la santé de vos batteries.
+
+---
+
+## 🛠️ Stack Technique
+
+- **Backend** : Django (Python) pour la robustesse et la sécurité.
+- **Frontend** : CSS3 moderne (Variables, Keyframes, Flexbox/Grid) & JavaScript Vanilla.
+- **Visualisation** : ApexCharts.js pour des graphiques animés haute performance.
+- **Iconographie** : Phosphor Icons pour un look épuré.
+- **Authentification** : Système sécurisé basé sur l'email, conforme aux standards modernes.
+
+---
+
+## 📸 Captures d'Écran
+
+| Gestion des Appareils | Monitoring Intelligent |
+| :---: | :---: |
+| ![Appareils](static/images/smart_appliances_control_1770635728381.png) | ![Batterie](static/images/solar_battery_dashboard_1770635840297.png) |
+
+---
+
+## 🚀 Installation & Lancement
+
+### 1. Clonage & Environnement
 ```bash
-git clone <url-du-depot>
-cd projet
+git clone https://github.com/mamy83/projet-groupe8.git
+cd projet-groupe8
+python -m venv .venv
+.\.venv\Scripts\activate  # Windows
 ```
 
-### 2. Créer un environnement virtuel
-```bash
-# Windows
-python -m venv venv
-venv\Scripts\activate
-
-# Linux / Mac
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 3. Installer les dépendances
+### 2. Dépendances & Base de données
 ```bash
 pip install -r requirements.txt
-```
-
-### 4. Appliquer les migrations
-```bash
 python manage.py migrate
 ```
 
-## Lancement du Projet
-
-Pour démarrer le serveur de développement local :
+### 3. Exécution
 ```bash
 python manage.py runserver
 ```
-Une fois le serveur lancé, accédez au site via : `http://127.0.0.1:8000/`
-
-## Configuration Initiale
-
-1. **Compte** : Créez un compte utilisateur.
-2. **Système** : Une fois connecté, rendez-vous dans la section "Configuration" pour entrer les caractéristiques de votre installation solaire.
-3. **Appareils** : Ajoutez vos appareils électriques habituels avec leur puissance en Watts.
-4. **Usage** : Utilisez le bouton "Input Niveau" pour mettre à jour votre niveau de batterie actuel et voir l'algorithme en action !
 
 ---
-*Projet réalisé pour optimiser l'autonomie énergétique solaire.*
+
+## 📖 Utilisation
+
+1. **Configuration Initiale** : Dans la page "Configuration", renseignez la capacité de vos batteries (Ah) et la puissance de vos panneaux (Wc).
+2. **Inventaire** : Ajoutez vos appareils (TV, Frigo, Lampe...) avec leur puissance moyenne.
+3. **Suivi** : Mettez à jour votre niveau de batterie via "Input Niveau" pour recevoir vos conseils immédiats.
+
+---
+
+## 🤝 Contribution
+
+Réalisé par l'équipe **SolarGuard (Groupe 8)**.
+N'hésitez pas à ouvrir une *Issue* ou à soumettre une *Pull Request* !
+
+*Optimisé pour un avenir plus vert.* 🌱
