@@ -100,17 +100,14 @@ Le développement du projet SolarGuard a été orchestré en plusieurs phases cl
 
 ## 📸 Captures d'Écran
 
-| Gestion des Appareils | Monitoring Intelligent |
-| :---: | :---: |
-| ![Appareils](static/images/smart_appliances_control_1770635728381.png) | ![Batterie](static/images/solar_battery_dashboard_1770635840297.png) |
+| Tableaux de bord | 
+| 
+| ![Appareils](static/images/smart_appliances_control_1770635728381.png)|
 
 ---
-
-## 📸 Captures d'Écran
-
-| Gestion des Appareils | Monitoring Intelligent |
-| :---: | :---: |
-| ![Appareils](static/images/smart_appliances_control_1770635728381.png) | ![Batterie](static/images/solar_battery_dashboard_1770635840297.png) |
+| Configuration Système |
+| 
+| ![Batterie](static/images/image2.png) |
 
 ---
 
