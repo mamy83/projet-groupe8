@@ -4,7 +4,18 @@
 
 SolarGuard est une solution logicielle innovante conçue pour optimiser la gestion de la consommation électrique au sein des foyers et des petites entreprises dépendants d'installations solaires autonomes (off-grid). Dans un contexte où la stabilité énergétique est un défi majeur, notamment en Afrique de l'Ouest, SolarGuard apporte une couche d'intelligence permettant de transformer une installation solaire passive en un système de gestion active. L'objectif principal est de prévenir les coupures d'électricité imprévues et de prolonger la durée de vie des composants (batteries) via une aide à la décision basée sur des algorithmes prédictifs et une analyse de charge en temps réel.
 
-## 2. Objectifs Globaux
+## 2. Problématique
+
+La transition vers l'énergie solaire autonome (hors-réseau) se heurte souvent à un obstacle majeur : **l'imvisibilité de la consommation**.
+
+De nombreux foyers et petites entreprises ignorent la capacité réelle de leur stockage et l'impact direct de chaque appareil allumé sur l'autonomie restante. Ce manque de données claires entraîne deux conséquences graves :
+
+1. **Les coupures brutales** : L'énergie vient à manquer au moment le plus critique (nuit, soins médicaux, travail informatique).
+2. **La dégradation matérielle** : Les batteries subissent des décharges profondes répétées qui divisent par deux leur durée de vie, augmentant drastiquement les coûts de maintenance.
+
+SolarGuard répond à cette question centrale : *Comment permettre à un utilisateur profane de piloter son énergie solaire sans risquer la coupure ?*
+
+## 3. Objectifs Globaux
 
 * **Évaluation en temps réel** : Calculer et afficher l'autonomie restante en heures et minutes en fonction de la charge actuelle.
 * **Optimisation de la consommation** : Fournir des recommandations d'usage précises pour éviter les surcharges et les décharges profondes.
