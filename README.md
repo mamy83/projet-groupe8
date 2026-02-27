@@ -100,12 +100,9 @@ Le développement du projet SolarGuard a été orchestré en plusieurs phases cl
 
 ## 📸 Captures d'Écran
 
-| Tableaux de bord 
-| ![Appareils](static/images/image.png)|
-
----
-| Configuration Système 
-| ![Batterie](static/images/image2.png) |
+| Tableaux de bord | Configuration Système |
+| :---: | :---: |
+| ![Appareils](static/images/image.png) | ![Batterie](static/images/image2.png) |
 
 ---
 
